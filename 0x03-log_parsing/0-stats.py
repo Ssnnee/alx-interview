@@ -51,7 +51,9 @@ def stats():
 
     except KeyboardInterrupt:
         print_metrics(total_file_size, status_code_dic)
-        sys.exit(0)
+
+    if (total_file_size == 0):
+        print_metrics(total_file_size, status_code_dic)
 
 
 __name__ == "__main__" and stats()
