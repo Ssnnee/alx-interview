@@ -10,7 +10,8 @@ def print_metrics(total_file_size, status_code_dic):
     """Print the metrics."""
     print("File size: {}".format(total_file_size))
     for key in sorted(status_code_dic.keys()):
-        print("{}: {}".format(key, status_code_dic[key]))
+        if (status_code_dic[key] is not None):
+            print("{}: {}".format(key, status_code_dic[key]))
     return
 
 
@@ -18,12 +19,16 @@ def input_parser(line):
     """Parse input and return the <status code> and <file size>"""
     try:
         parsed_line = line.split()
-        file_size = int(parsed_line[-1])
-        status_code = int(parsed_line[-2])
 
-        if (len(line) < 2):
-            return (0, None)
-        return (file_size, status_code)
+        try:
+            file_size = int(parsed_line[-1])
+            status_code = int(parsed_line[-2])
+            if (len(line) < 2):
+                return (0, None)
+            return (file_size, status_code)
+        except Exception:
+            return (file_size, None)
+
     except Exception:
         return (0, None)
 
