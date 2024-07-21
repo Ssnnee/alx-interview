@@ -15,3 +15,7 @@ Here are a few things to consider when implementing this project:
 - Regular Expressions
 - Dictionaries in Python
 - Exception Handling
+
+> [!NOTE]
+> Could not handle wrong format. Should probably use regex to success
+>
