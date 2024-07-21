@@ -10,7 +10,9 @@ def print_metrics(total_file_size, status_code_dic):
     """Print the metrics."""
     print("File size: {}".format(total_file_size))
     for key in sorted(status_code_dic.keys()):
-        if (status_code_dic[key] is not None):
+        if (status_code_dic[key] is None):
+            pass
+        else:
             print("{}: {}".format(key, status_code_dic[key]))
     return
 
