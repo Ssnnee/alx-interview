@@ -19,3 +19,14 @@ Here are a few things to consider when implementing this project:
 > [!NOTE]
 > Could not handle wrong format. Should probably use regex to success
 >
+
+## How to use
+- First need to make the files executable :
+```bash
+chmod +x 0-generator.py 0-stats.py
+```
+- Then run the generator and stats
+```bash
+./0-generator.py | ./0-stats.py
+```
+
