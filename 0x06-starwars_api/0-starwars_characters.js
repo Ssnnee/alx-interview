@@ -1,22 +1,36 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 const request = require('request');
-const url = `https://swapi-api.alx-tools.com/api/films/${process.argv[2]}`;
+const { promisify } = require('util');
 
-request(url, function (err, res, body) {
-  if (err) {
-    console.log(err);
-  } else {
-    const res = JSON.parse(body);
-    for (const character of res.characters) {
-      request(character, function (err, res, body) {
-        if (err) {
-          console.log(err);
-        } else {
-          const res = JSON.parse(body);
-          console.log(res.name);
-        }
-      });
+const requestAsync = promisify(request);
+
+async function getFilmAndCharacters(filmId) {
+  const url = `https://swapi-api.alx-tools.com/api/films/${filmId}/`;
+
+  try {
+    const { body } = await requestAsync(url);
+    const film = JSON.parse(body);
+
+    for (const characterUrl of film.characters) {
+      try {
+        const { body: charBody } = await requestAsync(characterUrl);
+        const character = JSON.parse(charBody);
+        console.log(character.name);
+      } catch (charError) {
+        console.error(`Error fetching character data: ${charError.message}`);
+      }
     }
+  } catch (error) {
+    console.error(`Error fetching film data: ${error.message}`);
   }
-});
+}
+
+const filmId = process.argv[2];
+if (!filmId) {
+  console.error('Please provide a film ID as an argument.');
+  process.exit(1);
+}
+
+getFilmAndCharacters(filmId);
+
