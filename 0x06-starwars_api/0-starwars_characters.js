@@ -1,11 +1,11 @@
-#!/usr/bin/env node
+#!/usr/bin/node
 
 const request = require('request');
 const { promisify } = require('util');
 
 const requestAsync = promisify(request);
 
-async function getFilmAndCharacters(filmId) {
+async function getFilmCharacterNames(filmId) {
   const url = `https://swapi-api.alx-tools.com/api/films/${filmId}/`;
 
   try {
@@ -32,5 +32,5 @@ if (!filmId) {
   process.exit(1);
 }
 
-getFilmAndCharacters(filmId);
+getFilmCharacterNames(filmId);
 
