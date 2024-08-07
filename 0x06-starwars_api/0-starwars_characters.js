@@ -5,7 +5,7 @@ const { promisify } = require('util');
 
 const requestAsync = promisify(request);
 
-async function getFilmCharacterNames(filmId) {
+async function getFilmCharacterNames (filmId) {
   const url = `https://swapi-api.alx-tools.com/api/films/${filmId}/`;
 
   try {
@@ -33,4 +33,3 @@ if (!filmId) {
 }
 
 getFilmCharacterNames(filmId);
-
